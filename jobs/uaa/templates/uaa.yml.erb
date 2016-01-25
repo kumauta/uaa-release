@@ -38,6 +38,8 @@ database:
 
 <% if properties.uaa && properties.uaa.ldap && ((properties.uaa.ldap.enabled &&  (properties.uaa.ldap.enabled==true)) || (properties.uaa.spring_profiles && properties.uaa.spring_profiles.eql?('ldap'))) %>
 spring_profiles: <%= properties.uaadb.db_scheme %>,ldap
+<% elsif properties.uaa && properties.uaa.keystone && properties.uaa.keystone.enabled && properties.uaa.keystone.enabled==true %>
+spring_profiles: <%= properties.uaadb.db_scheme %>,keystone
 <% elsif properties.uaa && properties.uaa.spring_profiles && properties.uaa.spring_profiles.include?('ldap') && properties.uaa.ldap %>
 spring_profiles: <%= properties.uaa.spring_profiles ? properties.uaa.spring_profiles : properties.uaadb.db_scheme %>
 <% elsif properties.login && properties.login.spring_profiles && properties.login.spring_profiles.include?('ldap') &&  properties.login.ldap && properties.login.ldap.profile_type %>
@@ -257,5 +259,10 @@ ldap:
     sslCertificateAlias: <%= properties.login.ldap.sslCertificateAlias %>
     <% end %>
   <% end %>  
+<% elsif properties.uaa && properties.uaa.keystone && properties.uaa.keystone.enabled && properties.uaa.keystone.enabled==true %>
+keystone:
+  enabled: true
+  authentication:
+    url: '<%= properties.uaa.keystone.authentication.url %>'
 <% end %>
 

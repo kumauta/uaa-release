@@ -490,6 +490,13 @@ properties:
   uaa.spring_profiles:
     description: "Deprecated. Use 'uaa.ldap.enabled' instead. Sets the Spring profiles on the UAA web application. This gets combined with the 'uaadb.db_scheme' property if and only if the value is exactly 'ldap' in order to setup the database, for example 'ldap,mysql'. If spring_profiles contains more than just 'ldap' it will be used to overwrite spring_profiles and db_scheme ignored. See uaa.yml.erb."
 
+  # Keystone
+  uaa.keystone.enabled:
+    description: "Set to true to enable Keystone"
+    default: false
+  uaa.keystone.authenticationUrl:
+    description: "Keystone authentication url"
+
   # Saml
   login.saml.entityid:
     description: "This is used as the SAML Service Provider Entity ID"
